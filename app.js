@@ -1,32 +1,36 @@
 const http = require('http');
+const fs = require('fs/promises');
+const path = require('path');//ensures manipulation of paths cross platform functionality
 const PORT = process.env.PORT;
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
 
    try{
     if(req.method === 'GET'){
+        let filePath;
         if(req.url === '/'){
-
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end('<h1>Home</h1>');
+            filePath = path.join(__dirname, 'public' , 'index.html');
+            
         }else if(req.url === '/about'){
     
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end('<h1>About</h1>');
+            filePath = path.join(__dirname, 'public' , 'about.html');
     
         }else if(req.url === '/contact-me'){
     
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end('<h1>Contact-me</h1>');
+            filePath = path.join(__dirname, 'public' , 'contact-me.html');
+    
     
     
         }else{
-            res.writeHead(404, {'Content-Type': 'text/html'});
-            res.end('<h1>Error 404</h1>');
+            filePath = path.join(__dirname, 'public' , '404.html');
+    
     
     
         }
-
+        const data = await fs.readFile(filePath);//reads file at constructed path
+        res.setHeader('Content-Type', 'text/html')
+        res.write(data);
+        res.end();
 
     }else{
 
@@ -55,8 +59,12 @@ const server = http.createServer((req, res) => {
 
 });
 
+
 server.listen(PORT, ()=>{
 
     console.log(`Server running on port ${PORT}`)
+    //console.log(__filename, __dirname);
+    //dirmane: is entire path not file name included
+    //filename: entire path including file(in this case app.js)
 
 });
