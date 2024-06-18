@@ -1,0 +1,22 @@
+{
+  "name": "basic-informational-site",
+  "version": "1.0.0",
+  "description": "Node.js simple server side program",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --env-file=.env app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/WillMay09/Basic-Informational-Site.git"
+  },
+  "author": "William Mayhood",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WillMay09/Basic-Informational-Site/issues"
+  },
+  "homepage": "https://github.com/WillMay09/Basic-Informational-Site#readme",
+  "dependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
