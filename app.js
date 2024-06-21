@@ -34,7 +34,8 @@ const server = http.createServer(async (req, res) => {
 
     }else{
 
-        throw new Error('Method not allowed');
+        res.writeHead(405, { 'Content-Type': 'text/html' }); // 405 Method Not Allowed
+        res.end('<h1>Method Not Allowed</h1>');
     }
 
 
